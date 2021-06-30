@@ -1,0 +1,56 @@
+<template>
+  <table class="table">
+    <thead class="table-secondary">
+      <tr>
+        <th>Nama</th>
+        <th>NOP</th>
+        <th>ID Pamong</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="result in resultData" :key="result.id">
+        <!-- <td>Muhammad Iqbal Naufal Ilmi</td>
+        <td>35.05.150.009.004.0038.0</td>
+        <td>08</td> -->
+        <!-- <td>{{result.taxpayer.taxpayer_name}}</td> -->
+        <td>{{result.taxpayer.name}}</td>
+        <td>{{result.tax_object.nop}}</td>
+        <td>{{result.tax_object.guardian_id}}</td>
+        <td>
+          <img @click="edit(result)" src="../../assets/Pencarian/pencil-square.svg" alt="">
+          <img @click="deleteData(result.id)" class="ms-2" src="../../assets/Pencarian/trash.svg" alt="">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</template>
+
+<script>
+import axios from 'axios'
+export default {
+  props: ['resultData'],
+  data(){
+    return{
+      hasilPencarian: null
+    }
+  },
+  methods:{
+    edit(result){
+      sessionStorage.setItem('data', JSON.stringify(result))
+      this.$router.push({ name: "EditSPPT" });
+    },
+    deleteData(id){
+      axios.delete('https://spptdesasumberjo.herokuapp.com/api/v1/sppt/delete/' + id,
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          },
+        })  
+        .then(() => {
+          window.location.reload();
+        })
+    }
+  }
+}
+</script>
