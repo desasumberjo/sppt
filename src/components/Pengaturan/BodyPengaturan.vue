@@ -39,11 +39,15 @@
       <div class="form-text">
         Password harus memiliki 8 karakter
       </div>
+      <div class="alert alert-danger mt-4" role="alert" v-if="isError">
+              Data yang anda masukkan Belum Lengkap
+            </div>
     </div>
+    
   </div>
 
   <div class="d-flex justify-content-end">
-    <button @click="updateProfile" class="btn btn-primary mt-4 ">Simpan</button>
+    <button @click="updateProfile" class="btn btn-primary mt-2 ">Simpan</button>
   </div>
 </template>
 
@@ -58,7 +62,8 @@ export default {
       email: "",
       oldPassword: "",
       password: "",
-      confirmNewPassword: ""
+      confirmNewPassword: "",
+      isError: false
     }
   },
   methods: {
@@ -81,6 +86,9 @@ export default {
           })  
           .then(() => {
             location.reload();
+          })
+          .catch(() => {
+            this.isError = true
           })
       }
     }

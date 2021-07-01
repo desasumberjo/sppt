@@ -7,6 +7,9 @@
           <form>
             <DataPersonal />
             <DataAlamat/>
+            <div class="alert alert-danger" role="alert" v-if="isError">
+              Data yang anda masukkan Belum Lengkap
+            </div>
             <div class="d-flex justify-content-end mt-4">
               <button type="button" class="btn btn-primary" @click="send">Kirim</button>
             </div>
@@ -24,6 +27,11 @@ import DataPersonal from '../components/TambahData/DataPersonal.vue'
 import DataAlamat from '../components/TambahData/DataAlamat.vue'
 export default {
   components: {Aside, DataPersonal, DataAlamat},
+  data(){
+    return{
+      isError: false
+    }
+  },
   name: 'TambahData',
   methods: {
     send(){
@@ -74,6 +82,9 @@ export default {
           sessionStorage.removeItem("landArea"),
           sessionStorage.removeItem("buildingArea"),
           this.$router.push({ name: "Pencarian" });
+        })
+        .catch(() =>{
+          this.isError = true
         })
     }
   }

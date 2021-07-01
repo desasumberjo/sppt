@@ -8,6 +8,9 @@
             <DataPersonal />
             <DataAlamat/>
             <DataMutasi />
+            <div class="alert alert-danger" role="alert" v-if="isError">
+              Data yang anda masukkan Belum Lengkap
+            </div>
             <div class="d-flex justify-content-end mt-4">
               <button type="button" class="btn btn-primary" @click="send">Kirim</button>
             </div>
@@ -27,6 +30,11 @@ import DataMutasi from '../components/MutasiData/TargetMutasi.vue'
 export default {
   components: {Aside, DataPersonal, DataAlamat, DataMutasi},
   name: 'MutasiDataPersonal',
+  data(){
+    return{
+      isError: false,
+    }
+  },
   methods:{
     send(){
       axios.post('https://spptdesasumberjo.herokuapp.com/api/v1/sppt/mutation',
@@ -77,6 +85,9 @@ export default {
           sessionStorage.removeItem("landArea"),
           sessionStorage.removeItem("buildingArea"),
           this.$router.push({ name: "Pencarian" });
+        })
+        .catch(() => {
+          this.isError = true
         })
     }
   }

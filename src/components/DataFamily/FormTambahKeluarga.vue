@@ -22,6 +22,9 @@
         <label class="form-label">RW</label>
         <input v-on:keyup.enter="sendFamily" v-model="rw" type="number" class="form-control">
       </div>
+      <div class="alert alert-danger" role="alert" v-if="isError">
+        Data yang anda masukkan Belum Lengkap
+      </div>
     </div>
 
     <div class="d-flex justify-content-between mt-4">
@@ -40,7 +43,8 @@ export default {
       road: '',
       village: '',
       rt: '',
-      rw: ''
+      rw: '',
+      isError: false
     }
   },
   methods: {
@@ -61,6 +65,9 @@ export default {
         .then((response) => {
           this.result = response.data.data
           this.$router.push({ name: "DataFamily" });
+        })
+        .catch(() => {
+          this.isError = true
         })
     },
     previous(){
