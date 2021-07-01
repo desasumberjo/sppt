@@ -48,6 +48,9 @@ export default {
         .then((response) => {
           this.result = response.data.data
         })
+        .catch(() => {
+          window.alert('Data tidak Ditemukan')
+        })
     }
   },
 }

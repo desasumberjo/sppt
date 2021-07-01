@@ -5,7 +5,7 @@
       <button @click="search" type="button" class="btn btn-primary mx-1 btn-sm ms-3">Cari</button>
     </div>
     <div class="col d-flex justify-content-between my-4">
-      <h2>Data Admin</h2>
+      <h2>Data Keluarga</h2>
       <button @click="addFamily" class="btn btn-primary">
         Tambah Keluarga
       </button>
@@ -34,6 +34,9 @@ export default {
         })  
         .then((response) => {
           this.result = response.data.data
+        })
+        .catch(() => {
+          window.alert('Data tidak Ditemukan')
         })
     },
     addFamily(){

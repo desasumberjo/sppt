@@ -40,7 +40,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/EditSPPT.vue')
   },
   {
-    path: '/mutasi-data-personal',
+    path: '/mutasi-data',
     name: 'MutasiDataPersonal',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
