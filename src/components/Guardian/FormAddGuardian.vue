@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <h2>Tambah Keluarga</h2>
+    <h2>Tambah Pamong</h2>
     <div class="row mt-4">
       <div class="col-12">
         <label class="form-label">ID</label>
@@ -9,10 +9,13 @@
       <div class="col-12 my-3">
         <label class="form-label">Nama</label>
         <input v-on:keyup.enter="sendGuardian" v-model="name" type="text" class="form-control">
+        <div class="alert alert-danger mt-4" role="alert" v-if="isError">
+          Data yang anda masukkan Belum Lengkap
+        </div>
       </div>
     </div>
 
-    <div class="d-flex justify-content-between mt-4">
+    <div class="d-flex justify-content-between mt-1">
       <button @click="previous" class="btn btn-primary">Kembali</button>
       <button @click="sendGuardian" class="btn btn-primary">Kirim</button>
     </div>
@@ -25,7 +28,8 @@ export default {
   data(){
     return{
       id: '',
-      name: ''
+      name: '',
+      isError: false
     }
   },
   methods: {
@@ -45,6 +49,9 @@ export default {
         })  
         .then(() => {
           this.$router.push({ name: "DataGuardian" });
+        })
+        .catch(() => {
+          this.isError = true
         })
     }
   }

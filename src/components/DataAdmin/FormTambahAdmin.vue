@@ -33,6 +33,9 @@
         <input v-on:keyup.enter="submit" type="password" class="form-control">
       </div>
     </div>
+    <div class="alert alert-danger mt-4" role="alert" v-if="isError">
+      Data yang anda masukkan Belum Lengkap
+    </div>
 
     <div class="d-flex justify-content-end mt-4">
       <button @click="submit" class="btn btn-primary">Kirim</button>
@@ -49,7 +52,8 @@ export default {
       occupation: "",
       username: "",
       email: "",
-      password: ""
+      password: "",
+      isError: false
     }
   },
   methods: {
@@ -70,6 +74,9 @@ export default {
         .then((response) => {
           this.result = response.data.data
           this.$router.push({ name: "DataAdmin" });
+        })
+        .catch(() => {
+          this.isError = true
         })
     }
   }
