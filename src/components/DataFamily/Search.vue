@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     search(){
-      axios.get('https://spptdesasumberjo.herokuapp.com/api/v1/family/name/' + this.familyName,
+      axios.get('https://spptdesasumberjo.herokuapp.com/api/v1/family/name/' + this.familyName.toUpperCase(),
         {
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("token")}`,
