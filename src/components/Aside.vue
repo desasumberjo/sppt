@@ -27,7 +27,7 @@
                 <router-link to="/tambah-data" class="nav-link mt-2">Tambah Data</router-link>
               </li>
               <li class="nav-item">
-                <router-link to="/mutasi-data-personal" class="nav-link mt-2">Mutasi Data</router-link>
+                <router-link to="/mutasi-data" class="nav-link mt-2">Mutasi Data</router-link>
               </li>
               <li v-if="superAdmin" class="nav-item">
                 <router-link to="/data-admin" class="nav-link mt-2">Data Admin</router-link>
