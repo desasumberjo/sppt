@@ -2,20 +2,20 @@
   <div id="container-login" class="d-flex align-items-center justify-content-center">
     <div id="wrap-login" class="d-flex align-items-center justify-content-center border rounded p-5 d-flex justify-content-around" style="background-color: #fff !important">
       <img src="../assets/logo-kab-blitar.jpg" id="gambar" alt="logo" />
-      <div>
+      <form @submit="handleSubmit">
         <h3 class="d-flex justify-content-center">Member Login</h3>
         <div class="mt-4 mb-3">
           <label for="exampleFormControlInput1" class="form-label">Nama Pengguna</label>
-          <input v-on:keyup.enter="submit" type="text" class="form-control" id="exampleFormControlInput1" placeholder="namapengguna" v-model="username" />
+          <input v-on:keyup.enter="submit" type="text" class="form-control" id="exampleFormControlInput1" placeholder="namapengguna" v-model="username" required />
         </div>
         <div class="mb-3">
           <label for="inputPassword" class="form-label">Password</label>
-          <input v-on:keyup.enter="submit" type="password" class="form-control" id="inputPassword" placeholder="************" v-model="password" />
+          <input v-on:keyup.enter="submit" type="password" class="form-control" id="inputPassword" placeholder="************" v-model="password" required />
         </div>
         <div class="d-grid gap-2">
-          <button @click="submit" class="btn btn-primary" type="button">Masuk</button>
+          <button @click="submit" class="btn btn-primary" type="submit">Masuk</button>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </template>
@@ -31,7 +31,8 @@ export default {
     };
   },
   methods: {
-    submit() {
+    handleSubmit(e) {
+      e.preventDefault();
       axios.get("sanctum/csrf-cookie").then(() => {
         axios
           .post("api/v1/login", {
