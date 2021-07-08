@@ -71,14 +71,14 @@ label {
   display: inline-block;
   height: 29%;
   width: 29%;
+  /* margin: -100px; */
 }
 #container-login {
-  /* position: relative; */
   height: 100vh;
   background-color: #b0bec5 !important;
-  /* do */
 }
 #wrap-login {
+  width: 75%;
   border-radius: 30px !important;
 }
 </style>
