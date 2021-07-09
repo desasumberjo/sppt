@@ -1,5 +1,5 @@
 <template>
-  <h2>Data Personal</h2>
+  <h3>Data Personal</h3>
   <div class="row mt-4">
     <div class="col">
       <label class="form-label">NOP</label>

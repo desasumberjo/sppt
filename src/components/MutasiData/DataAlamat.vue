@@ -1,5 +1,5 @@
 <template>
-  <h2 class="mt-4">Alamat</h2>
+  <h3 class="mt-4">Alamat</h3>
   <div class="row mt-4">
     <div class="col">
       <div class="row">
