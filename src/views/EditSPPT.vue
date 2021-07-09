@@ -7,8 +7,11 @@
           <form>
             <DataPersonal />
             <DataAlamat />
+            <div class="alert alert-danger" v-if="alert" role="alert">
+              Data Tidak Ditemukan!
+            </div>
             <div class="d-flex justify-content-end mt-4">
-              <button type="button" class="btn btn-primary" @click="send">Kirim</button>
+              <button type="button" class="btn btn-primary" @click="send" :disabled="isLoading"><span v-if="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Kirim</button>
             </div>
           </form>
         </div>
@@ -28,10 +31,13 @@ export default {
   data() {
     return {
       firstData: JSON.parse(sessionStorage.getItem("data")),
+      isLoading: false,
+      alert: false,
     };
   },
   methods: {
     send() {
+      this.isLoading = true;
       axios
         .patch(
           "api/v1/sppt/update/" + this.firstData.tax_object.nop,
@@ -64,8 +70,14 @@ export default {
           }
         )
         .then(() => {
+          this.isLoading = false;
           sessionStorage.removeItem("nop"), sessionStorage.removeItem("blockNumber"), sessionStorage.removeItem("determination"), sessionStorage.removeItem("taxPayerName"), sessionStorage.removeItem("familyId"), sessionStorage.removeItem("guardianID"), sessionStorage.removeItem("taxPayerRoad"), sessionStorage.removeItem("taxPayerRT"), sessionStorage.removeItem("taxPayerRW"), sessionStorage.removeItem("taxPayerVillage"), sessionStorage.removeItem("taxObjectRoad"), sessionStorage.removeItem("taxObjectRT"), sessionStorage.removeItem("taxObjectRW"), sessionStorage.removeItem("taxObjectVillage"), sessionStorage.removeItem("spptPersilNumber"), sessionStorage.removeItem("landArea"), sessionStorage.removeItem("buildingArea"), localStorage.removeItem("data");
           this.$router.push({ name: "Pencarian" });
+        })
+        .catch((error) => {
+          this.isLoading = false;
+          this.alert = true;
+          console.log(error.response.data);
         });
     },
   },
