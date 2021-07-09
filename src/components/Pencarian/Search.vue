@@ -80,6 +80,8 @@ input {
   font-weight: 500;
 }
 .input-group-text {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
   border-radius: 10px !important;
 }
 .btn {

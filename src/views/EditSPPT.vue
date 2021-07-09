@@ -20,8 +20,8 @@
 <script>
 import axios from "axios";
 import Aside from "../components/Aside.vue";
-import DataPersonal from "../components/TambahData/DataPersonal.vue";
-import DataAlamat from "../components/TambahData/DataAlamat.vue";
+import DataPersonal from "../components/EditSPPT/DataPersonal.vue";
+import DataAlamat from "../components/EditSPPT/DataAlamat.vue";
 export default {
   components: { Aside, DataPersonal, DataAlamat },
   name: "EditSPPT",
