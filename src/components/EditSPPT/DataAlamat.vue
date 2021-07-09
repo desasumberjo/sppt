@@ -115,6 +115,20 @@ export default {
       },
     };
   },
+  mounted: function() {
+    let data = JSON.parse(sessionStorage.getItem("data"));
+    this.sendData.taxPayerRoad = data.tax_object.address.road;
+    this.sendData.taxPayerRT = parseInt(data.tax_object.address.rt);
+    this.sendData.taxPayerRW = parseInt(data.tax_object.address.rw);
+    this.sendData.taxPayerVillage = data.tax_object.address.village;
+    this.sendData.taxObjectRoad = data.taxpayer.address.road;
+    this.sendData.taxObjectRT = parseInt(data.taxpayer.address.rt);
+    this.sendData.taxObjectRW = parseInt(data.taxpayer.address.rw);
+    this.sendData.taxObjectVillage = data.taxpayer.address.village;
+    this.sendData.spptPersilNumber = data.tax_object.sppt_persil_number;
+    this.sendData.landArea = data.tax_object.land_area;
+    this.sendData.buildingArea = data.tax_object.building_area;
+  },
   updated: function() {
     this.$nextTick(function() {
       sessionStorage.setItem("taxPayerRoad", this.sendData.taxPayerRoad);
