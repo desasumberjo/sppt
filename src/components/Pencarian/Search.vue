@@ -5,13 +5,13 @@
     <span class="mx-1">.</span>
     <span class="input-group-text">05</span>
     <span class="mx-1">.</span>
-    <input v-on:keyup.enter="search" maxlength="3" type="text" v-model="number1" class="form-control" />
+    <input v-on:keyup.enter="search" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="3" v-model="number1" class="form-control" />
     <span class="mx-1">.</span>
-    <input v-on:keyup.enter="search" maxlength="3" type="text" v-model="number2" class="form-control" />
+    <input v-on:keyup.enter="search" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" type="number" v-model="number2" class="form-control" />
     <span class="mx-1">.</span>
-    <input v-on:keyup.enter="search" maxlength="3" type="text" v-model="number3" class="form-control" />
+    <input v-on:keyup.enter="search" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" type="number" v-model="number3" class="form-control" />
     <span class="mx-1">.</span>
-    <input v-on:keyup.enter="search" maxlength="4" type="text" v-model="number4" class="form-control" />
+    <input v-on:keyup.enter="search" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4" type="number" v-model="number4" class="form-control" />
     <span class="mx-1">.</span>
     <span class="input-group-text">0</span>
     <!-- ?? Button type Submit ?? -->
@@ -23,7 +23,7 @@
   <div class="alert alert-danger" v-if="alert" role="alert">
     Data Tidak Ditemukan!
   </div>
-  <h2 class="py-5">Hasil Pencarian</h2>
+  <h3 class="py-3">Hasil Pencarian</h3>
   <Table :resultData="result" />
 </template>
 
@@ -69,8 +69,15 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+h3 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
 input {
   border-radius: 10px !important;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
 }
 .input-group-text {
   border-radius: 10px !important;
