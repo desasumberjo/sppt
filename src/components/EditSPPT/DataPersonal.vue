@@ -66,7 +66,6 @@ import axios from "axios";
 export default {
   data() {
     return {
-      tes: "halo",
       families: null,
       guardian: null,
       sendData: {

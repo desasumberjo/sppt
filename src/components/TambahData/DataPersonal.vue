@@ -44,17 +44,19 @@
   <div class="mt-3">
     <label class="form-label">Nama Keluarga</label>
     <div class="dropdown d-grid gap-2">
-      <select class="form-select" aria-label="Default select example" v-model="sendData.familyID">
+      <input class="form-control" list="listOptionsFamily" placeholder="Type to search..." v-model="sendData.family" />
+      <datalist id="listOptionsFamily">
         <option v-for="family in families" :key="family.id">{{ family.id }} - {{ family.name }}</option>
-      </select>
+      </datalist>
     </div>
   </div>
   <div class="mt-3">
     <label class="form-label">Nama Pamong</label>
     <div class="dropdown d-grid gap-2">
-      <select class="form-select" aria-label="Default select example" v-model="sendData.guardianID">
+      <input class="form-control" list="listOptionsGuardian" placeholder="Type to search..." v-model="sendData.guardian" />
+      <datalist id="listOptionsGuardian">
         <option v-for="guardian in guardian" :key="guardian.id">{{ guardian.id }} - {{ guardian.name }}</option>
-      </select>
+      </datalist>
     </div>
   </div>
 </template>
@@ -114,3 +116,26 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+h3 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+input {
+  border-radius: 10px !important;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+.input-group-text {
+  border-radius: 10px !important;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+option {
+  border-radius: 10px !important;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+</style>
