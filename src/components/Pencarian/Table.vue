@@ -5,6 +5,8 @@
         <th>Nama</th>
         <th>NOP</th>
         <th>ID Pamong</th>
+        <th>Luas Lahan</th>
+        <th>Luas Bangunan</th>
         <th>Aksi</th>
       </tr>
     </thead>
@@ -17,6 +19,8 @@
         <td>{{ result.taxpayer.name }}</td>
         <td>{{ result.tax_object.nop }}</td>
         <td>{{ result.tax_object.guardian_id }}</td>
+        <td>{{ result.tax_object.land_area }} m<sup>2</sup></td>
+        <td>{{ result.tax_object.building_area }} m<sup>2</sup></td>
         <td>
           <img @click="edit(result)" src="../../assets/Pencarian/pencil-square.svg" alt="" />
           <img @click="deleteData(result.id)" class="ms-2" src="../../assets/Pencarian/trash.svg" alt="" />
@@ -54,3 +58,15 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+th {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+td {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+}
+</style>

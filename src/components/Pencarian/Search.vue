@@ -48,7 +48,6 @@ export default {
     handleSearch() {
       this.isLoading = true;
       this.nop = 3505 + this.number1 + this.number2 + this.number3 + this.number4 + 0;
-      console.log(this.nop);
       axios
         .get("api/v1/sppt/search/" + this.nop, {
           headers: {
