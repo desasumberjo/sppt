@@ -44,17 +44,19 @@
   <div class="mt-3">
     <label class="form-label">Nama Keluarga</label>
     <div class="dropdown d-grid gap-2">
-      <select class="form-select" aria-label="Default select example" v-model="sendData.familyID">
+      <input class="form-control" list="listOptionsFamily" placeholder="Type to search..." />
+      <datalist id="listOptionsFamily">
         <option v-for="family in families" :key="family.id">{{ family.id }} - {{ family.name }}</option>
-      </select>
+      </datalist>
     </div>
   </div>
   <div class="mt-3">
     <label class="form-label">Nama Pamong</label>
     <div class="dropdown d-grid gap-2">
-      <select class="form-select" aria-label="Default select example" v-model="sendData.guardianID">
+      <input class="form-control" list="listOptionsGuardian" placeholder="Type to search..." v-model="sendData.guardianID" />
+      <datalist id="listOptionsGuardian">
         <option v-for="guardian in guardian" :key="guardian.id">{{ guardian.id }} - {{ guardian.name }}</option>
-      </select>
+      </datalist>
     </div>
   </div>
 </template>
@@ -64,6 +66,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      tes: "halo",
       families: null,
       guardian: null,
       sendData: {
