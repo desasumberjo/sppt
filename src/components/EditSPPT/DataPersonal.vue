@@ -44,7 +44,7 @@
   <div class="mt-3">
     <label class="form-label">Nama Keluarga</label>
     <div class="dropdown d-grid gap-2">
-      <input class="form-control" list="listOptionsFamily" placeholder="Type to search..." />
+      <input class="form-control" list="listOptionsFamily" placeholder="Type to search..." v-model="sendData.family" />
       <datalist id="listOptionsFamily">
         <option v-for="family in families" :key="family.id">{{ family.id }} - {{ family.name }}</option>
       </datalist>
@@ -53,7 +53,7 @@
   <div class="mt-3">
     <label class="form-label">Nama Pamong</label>
     <div class="dropdown d-grid gap-2">
-      <input class="form-control" list="listOptionsGuardian" placeholder="Type to search..." v-model="sendData.guardianID" />
+      <input class="form-control" list="listOptionsGuardian" placeholder="Type to search..." v-model="sendData.guardian" />
       <datalist id="listOptionsGuardian">
         <option v-for="guardian in guardian" :key="guardian.id">{{ guardian.id }} - {{ guardian.name }}</option>
       </datalist>
@@ -78,9 +78,8 @@ export default {
         blockNumber2: "",
         determnination: "",
         taxPayerName: "",
-        familyID: "",
-        selectedFamilyID: this.familyID,
-        guardianID: "",
+        family: "",
+        guardian: "",
       },
     };
   },
@@ -103,6 +102,25 @@ export default {
       .then((response) => {
         this.guardian = response.data.data;
       });
+    let data = JSON.parse(sessionStorage.getItem("data"));
+    let nop = data.tax_object.nop;
+    // 350515000901500770
+    this.sendData.nop1 = nop.substr(4, 3);
+    this.sendData.nop2 = nop.substr(7, 3);
+    this.sendData.nop3 = nop.substr(10, 3);
+    this.sendData.nop4 = nop.substr(13, 4);
+    this.sendData.determnination = data.tax_object.determination;
+    this.sendData.taxPayerName = data.taxpayer.name;
+    this.sendData.family = data.taxpayer.family.id + " - " + data.taxpayer.family.name;
+    axios
+      .get("api/v1/guardian/" + data.tax_object.guardian_id, {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        },
+      })
+      .then((response) => {
+        this.sendData.guardian = response.data.data.id + " - " + response.data.data.name;
+      });
   },
   updated: function() {
     this.$nextTick(function() {
@@ -111,8 +129,8 @@ export default {
       sessionStorage.setItem("blockNumber", this.sendData.blockNumber1 + this.sendData.blockNumber2);
       sessionStorage.setItem("determination", this.sendData.determnination);
       sessionStorage.setItem("taxPayerName", this.sendData.taxPayerName);
-      sessionStorage.setItem("familyId", this.sendData.familyID.match(regex));
-      sessionStorage.setItem("guardianID", this.sendData.guardianID.match(regex));
+      sessionStorage.setItem("family", this.sendData.family.match(regex));
+      sessionStorage.setItem("guardianID", this.sendData.guardian.match(regex));
     });
   },
 };

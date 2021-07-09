@@ -41,7 +41,7 @@ export default {
             block_number: sessionStorage.getItem("blockNumber"),
             determnination: sessionStorage.getItem("determination"),
             taxpayer_name: sessionStorage.getItem("taxPayerName"),
-            family_id: sessionStorage.getItem("familyId"),
+            family_id: sessionStorage.getItem("family"),
             guardian_id: sessionStorage.getItem("guardianID"),
             taxpayer_road: sessionStorage.getItem("taxPayerRoad"),
             taxpayer_rt: sessionStorage.getItem("taxPayerRT"),
