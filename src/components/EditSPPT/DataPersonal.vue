@@ -8,13 +8,13 @@
         <span class="mx-1">.</span>
         <span class="input-group-text">05</span>
         <span class="mx-1">.</span>
-        <input type="number" class="form-control" maxlength="5" v-model="sendData.nop1" />
+        <input class="form-control" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="3" v-model="sendData.nop1" />
         <span class="mx-1">.</span>
-        <input type="number" class="form-control" v-model="sendData.nop2" />
+        <input class="form-control" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="3" v-model="sendData.nop2" />
         <span class="mx-1">.</span>
-        <input type="number" class="form-control" v-model="sendData.nop3" />
+        <input class="form-control" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="3" v-model="sendData.nop3" />
         <span class="mx-1">.</span>
-        <input type="number" class="form-control" v-model="sendData.nop4" />
+        <input class="form-control" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="4" v-model="sendData.nop4" />
         <span class="mx-1">.</span>
         <span class="input-group-text">0</span>
       </div>
