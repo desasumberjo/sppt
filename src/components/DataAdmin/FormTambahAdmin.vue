@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <h2>Tambah Admin</h2>
+    <h3>Tambah Admin</h3>
     <div class="row mt-4">
       <div class="col-6">
         <label class="form-label">Nama</label>
@@ -38,7 +38,7 @@
     </div>
 
     <div class="d-flex justify-content-end mt-4">
-      <button @click="submit" class="btn btn-primary">Kirim</button>
+      <button @click="submit" class="btn btn-primary" :disabled="isLoading"><span v-if="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span v-if="!isLoading">Kirim</span></button>
     </div>
   </div>
 </template>
@@ -54,10 +54,12 @@ export default {
       email: "",
       password: "",
       isError: false,
+      isLoading: false,
     };
   },
   methods: {
     submit() {
+      this.isLoading = true;
       axios
         .post(
           "api/v1/administrator",
@@ -75,13 +77,32 @@ export default {
           }
         )
         .then((response) => {
+          this.isLoading = false;
           this.result = response.data.data;
           this.$router.push({ name: "DataAdmin" });
         })
         .catch(() => {
+          this.isLoading = false;
           this.isError = true;
         });
     },
   },
 };
 </script>
+
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+h3 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+label {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+input {
+  border-radius: 10px !important;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+</style>
