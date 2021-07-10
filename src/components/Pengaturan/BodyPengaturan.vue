@@ -53,6 +53,7 @@
 <script>
 import axios from "axios";
 export default {
+  props: ["profile"],
   data() {
     return {
       name: "",
@@ -91,6 +92,12 @@ export default {
           });
       }
     },
+  },
+  mounted: function() {
+    this.name = this.profile.name;
+    this.occupation = this.profile.occupation;
+    this.username = this.profile.username;
+    this.email = this.profile.email;
   },
 };
 </script>
