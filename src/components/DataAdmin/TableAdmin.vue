@@ -1,7 +1,7 @@
 <template>
   <div class="row d-flex justify-content-between">
     <div class="col d-flex justify-content-between my-4">
-      <h2>Data Admin</h2>
+      <h3>Data Admin</h3>
       <button @click="addAdmin" class="btn btn-primary">
         Tambah Admin
       </button>
@@ -73,3 +73,22 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+h3 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+.btn {
+  border-radius: 18px !important;
+}
+th {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+td {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+}
+</style>
