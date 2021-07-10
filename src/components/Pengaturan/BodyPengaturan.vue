@@ -102,10 +102,18 @@ export default {
     },
   },
   mounted: function() {
-    this.name = this.profile.name;
-    this.occupation = this.profile.occupation;
-    this.username = this.profile.username;
-    this.email = this.profile.email;
+    axios
+      .get("api/v1/profile", {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        },
+      })
+      .then((response) => {
+        this.name = response.data.data.name;
+        this.occupation = response.data.data.occupation;
+        this.username = response.data.data.username;
+        this.email = response.data.data.email;
+      });
   },
   updated: function() {
     this.$nextTick(function() {
