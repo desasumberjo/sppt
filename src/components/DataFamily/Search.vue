@@ -5,7 +5,7 @@
     <button @click="search" type="button" class="btn btn-primary mx-1 btn-sm ms-3">Cari</button>
   </div>
   <div class="col d-flex justify-content-between my-4">
-    <h2>Data Keluarga</h2>
+    <h3>Data Keluarga</h3>
     <button @click="addFamily" class="btn btn-primary">
       Tambah Keluarga
     </button>
@@ -45,3 +45,21 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+h3 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+input {
+  border-radius: 10px !important;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+.input-group-text {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  border-radius: 10px !important;
+}
+</style>
