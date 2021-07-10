@@ -1,18 +1,19 @@
 <template>
   <div class="row d-flex justify-content-between">
-    <div class="col d-flex justify-content-between my-4">
-      <h2>Pindah Data Pamong</h2>
+    <div class="col d-flex justify-content-between my-3">
+      <h3>Pindah Data Pamong</h3>
     </div>
   </div>
-  <div class="my-3">
+  <div class="my-2">
     <label class="form-label">Pilih Pamong</label>
     <div class="dropdown d-grid gap-2">
-      <select class="form-select" aria-label="Default select example" v-model="guardianID">
+      <input class="form-control" list="listOptionsGuardian" placeholder="Type to search..." v-model="guardianID" />
+      <datalist id="listOptionsGuardian">
         <option v-for="guardian in guardian" :key="guardian.id">{{ guardian.id }} - {{ guardian.name }}</option>
-      </select>
+      </datalist>
     </div>
   </div>
-  <table class="table">
+  <table class="table my-4">
     <thead class="table-secondary">
       <tr>
         <th>NOP</th>
@@ -26,8 +27,8 @@
       <tr v-for="result in result" :key="result.id">
         <td>{{ result.tax_object.nop }}</td>
         <td>{{ result.taxpayer.name }}</td>
-        <td>{{ result.taxpayer.address.rt }}</td>
-        <td>{{ result.taxpayer.address.rw }}</td>
+        <td>{{ parseInt(result.taxpayer.address.rt) }}</td>
+        <td>{{ parseInt(result.taxpayer.address.rw) }}</td>
         <td>
           <input type="checkbox" :value="`${result.tax_object.nop}`" v-model="checkedNOP" />
         </td>
@@ -37,7 +38,6 @@
   <div class="d-flex justify-content-end mt-4">
     <button @click="submit" class="btn btn-primary">Kirim</button>
   </div>
-  <p>{{ data }}</p>
 </template>
 
 <script>
@@ -111,3 +111,24 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+h3 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+th {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+td {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+}
+option {
+  border-radius: 10px !important;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+</style>
