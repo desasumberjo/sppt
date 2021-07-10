@@ -13,11 +13,11 @@
 </template>
 
 <script>
-import Aside from '../components/Aside.vue'
-import HeaderPengaturan from '../components/Pengaturan/HeaderPengaturan.vue'
-import BodyPengaturan from '../components/Pengaturan/BodyPengaturan.vue'
+import Aside from "../components/Aside.vue";
+import HeaderPengaturan from "../components/Pengaturan/HeaderPengaturan.vue";
+import BodyPengaturan from "../components/Pengaturan/BodyPengaturan.vue";
 export default {
-  components: {Aside, HeaderPengaturan, BodyPengaturan},
-  name: 'Pengaturan',
-}
+  components: { Aside, HeaderPengaturan, BodyPengaturan },
+  name: "Pengaturan",
+};
 </script>
