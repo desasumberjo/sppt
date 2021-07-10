@@ -68,5 +68,20 @@ export default {
         });
     },
   },
+  mounted: function() {
+    axios
+      .get("api/v1/family/" + sessionStorage.getItem("idFamily"), {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        },
+      })
+      .then((response) => {
+        this.name = response.data.data.name;
+        this.road = response.data.data.road;
+        this.village = response.data.data.village;
+        this.rt = response.data.data.rt;
+        this.rw = response.data.data.rw;
+      });
+  },
 };
 </script>
