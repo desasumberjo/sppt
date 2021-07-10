@@ -1,18 +1,18 @@
 <template>
-  <h2 class="mt-4">Alamat</h2>
+  <h3 class="mt-4">Alamat</h3>
   <div class="row mt-4">
     <div class="col">
       <div class="row">
         <div class="col-10">
           <label class="form-label">Jalan Wajib Pajak</label>
           <div class="input-group mb-3">
-            <input type="text" class="form-control" v-model="sendData.taxPayerRoad">
+            <input type="text" class="form-control" v-model="sendData.taxPayerRoad" />
           </div>
         </div>
         <div class="col-2">
           <label class="form-label">RT</label>
           <div class="input-group mb-3">
-            <input type="number" class="form-control" v-model="sendData.taxPayerRT">
+            <input type="number" class="form-control" v-model="sendData.taxPayerRT" />
           </div>
         </div>
       </div>
@@ -22,13 +22,13 @@
         <div class="col-2">
           <label class="form-label">RW</label>
           <div class="input-group mb-3">
-            <input type="number" class="form-control" v-model="sendData.taxPayerRW">
+            <input type="number" class="form-control" v-model="sendData.taxPayerRW" />
           </div>
         </div>
         <div class="col-10">
           <label class="form-label">Kelurahan Wajib Pajak</label>
           <div class="input-group mb-3">
-            <input type="text" class="form-control" v-model="sendData.taxPayerVillage">
+            <input type="text" class="form-control" v-model="sendData.taxPayerVillage" />
           </div>
         </div>
       </div>
@@ -41,13 +41,13 @@
         <div class="col-10">
           <label class="form-label">Jalan Objek Pajak</label>
           <div class="input-group mb-3">
-            <input type="text" class="form-control" v-model="sendData.taxObjectRoad">
+            <input type="text" class="form-control" v-model="sendData.taxObjectRoad" />
           </div>
         </div>
         <div class="col-2">
           <label class="form-label">RT</label>
           <div class="input-group mb-3">
-            <input type="number" class="form-control" v-model="sendData.taxObjectRT">
+            <input type="number" class="form-control" v-model="sendData.taxObjectRT" />
           </div>
         </div>
       </div>
@@ -57,13 +57,13 @@
         <div class="col-2">
           <label class="form-label">RW</label>
           <div class="input-group mb-3">
-            <input type="number" class="form-control" v-model="sendData.taxObjectRW">
+            <input type="number" class="form-control" v-model="sendData.taxObjectRW" />
           </div>
         </div>
         <div class="col-10">
           <label class="form-label">Kelurahan Objek Pajak</label>
           <div class="input-group mb-3">
-            <input type="text" class="form-control" v-model="sendData.taxObjectVillage">
+            <input type="text" class="form-control" v-model="sendData.taxObjectVillage" />
           </div>
         </div>
       </div>
@@ -74,7 +74,7 @@
     <div class="col">
       <label class="form-label">No Persil SPPT</label>
       <div class="input-group mb-3">
-        <input type="number" class="form-control" v-model="sendData.spptPersilNumber">
+        <input type="number" class="form-control" v-model="sendData.spptPersilNumber" />
       </div>
     </div>
     <div class="col">
@@ -82,13 +82,13 @@
         <div class="col">
           <label class="form-label">Luas Bumi</label>
           <div class="input-group mb-3">
-            <input type="number" class="form-control" v-model="sendData.landArea">
+            <input type="number" class="form-control" v-model="sendData.landArea" />
           </div>
         </div>
         <div class="col">
           <label class="form-label">Luas Bangunan</label>
           <div class="input-group mb-3">
-            <input type="number" class="form-control" v-model="sendData.buildingArea">
+            <input type="number" class="form-control" v-model="sendData.buildingArea" />
           </div>
         </div>
       </div>
@@ -98,25 +98,39 @@
 
 <script>
 export default {
-  data(){
-    return{
-      sendData:{
-        taxPayerRoad: '',
-        taxPayerRT: '',
-        taxPayerRW: '',
-        taxPayerVillage: '',
-        taxObjectRoad: '',
-        taxObjectRT: '',
-        taxObjectRW: '',
-        taxObjectVillage: '',
-        spptPersilNumber: '',
-        landArea: '',
-        buildingArea: ''
-      }
-    }
+  data() {
+    return {
+      sendData: {
+        taxPayerRoad: "",
+        taxPayerRT: "",
+        taxPayerRW: "",
+        taxPayerVillage: "",
+        taxObjectRoad: "",
+        taxObjectRT: "",
+        taxObjectRW: "",
+        taxObjectVillage: "",
+        spptPersilNumber: "",
+        landArea: "",
+        buildingArea: "",
+      },
+    };
+  },
+  mounted: function() {
+    let data = JSON.parse(sessionStorage.getItem("data"));
+    this.sendData.taxPayerRoad = data.tax_object.address.road;
+    this.sendData.taxPayerRT = parseInt(data.tax_object.address.rt);
+    this.sendData.taxPayerRW = parseInt(data.tax_object.address.rw);
+    this.sendData.taxPayerVillage = data.tax_object.address.village;
+    this.sendData.taxObjectRoad = data.taxpayer.address.road;
+    this.sendData.taxObjectRT = parseInt(data.taxpayer.address.rt);
+    this.sendData.taxObjectRW = parseInt(data.taxpayer.address.rw);
+    this.sendData.taxObjectVillage = data.taxpayer.address.village;
+    this.sendData.spptPersilNumber = data.tax_object.sppt_persil_number;
+    this.sendData.landArea = data.tax_object.land_area;
+    this.sendData.buildingArea = data.tax_object.building_area;
   },
   updated: function() {
-    this.$nextTick(function () {
+    this.$nextTick(function() {
       sessionStorage.setItem("taxPayerRoad", this.sendData.taxPayerRoad);
       sessionStorage.setItem("taxPayerRT", this.sendData.taxPayerRT);
       sessionStorage.setItem("taxPayerRW", this.sendData.taxPayerRW);
@@ -128,7 +142,23 @@ export default {
       sessionStorage.setItem("spptPersilNumber", this.sendData.spptPersilNumber);
       sessionStorage.setItem("landArea", this.sendData.landArea);
       sessionStorage.setItem("buildingArea", this.sendData.buildingArea);
-    })
+    });
   },
-}
+};
 </script>
+
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+h3 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+input {
+  border-radius: 10px !important;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+.btn {
+  border-radius: 18px;
+}
+</style>

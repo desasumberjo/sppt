@@ -12,7 +12,7 @@
               Data yang anda masukkan Belum Lengkap
             </div>
             <div class="d-flex justify-content-end mt-4">
-              <button type="button" class="btn btn-primary" @click="send">Kirim</button>
+              <button type="button" class="btn btn-primary" @click="send" :disabled="isLoading"><span v-if="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span v-if="!isLoading">Kirim</span></button>
             </div>
           </form>
         </div>
@@ -33,10 +33,12 @@ export default {
   data() {
     return {
       isError: false,
+      isLoading: false,
     };
   },
   methods: {
     send() {
+      this.isLoading = true;
       axios
         .post(
           "api/v1/sppt/mutation",
@@ -70,8 +72,10 @@ export default {
         )
         .then(() => {
           sessionStorage.removeItem("nopTarget"), sessionStorage.removeItem("nop"), sessionStorage.removeItem("blockNumber"), sessionStorage.removeItem("determination"), sessionStorage.removeItem("taxPayerName"), sessionStorage.removeItem("familyId"), sessionStorage.removeItem("guardianID"), sessionStorage.removeItem("taxPayerRoad"), sessionStorage.removeItem("taxPayerRT"), sessionStorage.removeItem("taxPayerRW"), sessionStorage.removeItem("taxPayerVillage"), sessionStorage.removeItem("taxObjectRoad"), sessionStorage.removeItem("taxObjectRT"), sessionStorage.removeItem("taxObjectRW"), sessionStorage.removeItem("taxObjectVillage"), sessionStorage.removeItem("spptPersilNumber"), sessionStorage.removeItem("landArea"), sessionStorage.removeItem("buildingArea"), this.$router.push({ name: "Pencarian" });
+          this.isLoading = false;
         })
         .catch(() => {
+          this.isLoading = false;
           this.isError = true;
         });
     },

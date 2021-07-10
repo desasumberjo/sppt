@@ -1,5 +1,5 @@
 <template>
-  <h2>Data Personal</h2>
+  <h3>Data Personal</h3>
   <div class="row mt-4">
     <div class="col">
       <label class="form-label">NOP</label>
@@ -24,8 +24,8 @@
         <div class="col">
           <label class="form-label">Nomor Blok</label>
           <div class="input-group mb-3">
-            <input type="number" class="form-control" v-model="sendData.blockNumber1" />
-            <input type="number" class="ms-3 form-control" v-model="sendData.blockNumber2" />
+            <input class="form-control" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="3" v-model="sendData.nop3" disabled />
+            <input class="ms-3 form-control" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="3" v-model="sendData.nop4" disabled />
           </div>
         </div>
         <div class="col">
@@ -44,17 +44,19 @@
   <div class="mt-3">
     <label class="form-label">Nama Keluarga</label>
     <div class="dropdown d-grid gap-2">
-      <select class="form-select" aria-label="Default select example" v-model="sendData.familyID">
+      <input class="form-control" list="listOptionsFamily" placeholder="Type to search..." v-model="sendData.family" />
+      <datalist id="listOptionsFamily">
         <option v-for="family in families" :key="family.id">{{ family.id }} - {{ family.name }}</option>
-      </select>
+      </datalist>
     </div>
   </div>
   <div class="mt-3">
     <label class="form-label">Nama Pamong</label>
     <div class="dropdown d-grid gap-2">
-      <select class="form-select" aria-label="Default select example" v-model="sendData.guardianID">
+      <input class="form-control" list="listOptionsGuardian" placeholder="Type to search..." v-model="sendData.guardian" />
+      <datalist id="listOptionsGuardian">
         <option v-for="guardian in guardian" :key="guardian.id">{{ guardian.id }} - {{ guardian.name }}</option>
-      </select>
+      </datalist>
     </div>
   </div>
 </template>
@@ -105,7 +107,7 @@ export default {
     this.$nextTick(function() {
       let regex = /\d+/g;
       sessionStorage.setItem("nop", 3505 + this.sendData.nop1 + this.sendData.nop2 + this.sendData.nop3 + this.sendData.nop4 + 0);
-      sessionStorage.setItem("blockNumber", this.sendData.blockNumber1 + "." + this.sendData.blockNumber2);
+      sessionStorage.setItem("blockNumber", this.sendData.nop3 + "." + this.sendData.nop4);
       sessionStorage.setItem("determination", this.sendData.determnination);
       sessionStorage.setItem("taxPayerName", this.sendData.taxPayerName);
       sessionStorage.setItem("familyId", this.sendData.familyID.match(regex));
@@ -114,3 +116,26 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+h3 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+input {
+  border-radius: 10px !important;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+.input-group-text {
+  border-radius: 10px !important;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+option {
+  border-radius: 10px !important;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+</style>
