@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <h2>Tambah Pamong</h2>
+    <h3>Tambah Pamong</h3>
     <div class="row mt-4">
       <div class="col-12">
         <label class="form-label">ID</label>
@@ -60,3 +60,16 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+h3 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+input {
+  border-radius: 10px !important;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+</style>
