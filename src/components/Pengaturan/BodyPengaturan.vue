@@ -36,8 +36,11 @@
     <div class="col-12 mt-4">
       <label class="form-label">Ulangi Kata Sandi</label>
       <input v-on:keyup.enter="updateProfile" v-model="confirmNewPassword" type="password" class="form-control" />
-      <div class="form-text">
+      <div class="form-text" v-if="!alertPassword">
         Password harus memiliki 8 karakter
+      </div>
+      <div class="form-text" style="color: red" v-if="alertPassword">
+        Password tidak Sesuai
       </div>
       <div class="alert alert-danger mt-4" role="alert" v-if="isError">
         Data yang anda masukkan Belum Lengkap
@@ -64,6 +67,7 @@ export default {
       password: "",
       confirmNewPassword: "",
       isError: false,
+      alertPassword: false,
     };
   },
   methods: {
@@ -98,6 +102,15 @@ export default {
     this.occupation = this.profile.occupation;
     this.username = this.profile.username;
     this.email = this.profile.email;
+  },
+  updated: function() {
+    this.$nextTick(function() {
+      if (this.password !== this.confirmNewPassword) {
+        this.alertPassword = true;
+      } else {
+        this.alertPassword = false;
+      }
+    });
   },
 };
 </script>
