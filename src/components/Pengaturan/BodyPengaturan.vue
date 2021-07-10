@@ -49,7 +49,7 @@
   </div>
 
   <div class="d-flex justify-content-end">
-    <button @click="updateProfile" class="btn btn-primary mt-2 ">Simpan</button>
+    <button @click="updateProfile" class="btn btn-primary mt-2 " :disabled="isLoading"><span v-if="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span v-if="isLoading == false">Simpan</span></button>
   </div>
 </template>
 
@@ -66,12 +66,14 @@ export default {
       oldPassword: "",
       password: "",
       confirmNewPassword: "",
+      isLoading: false,
       isError: false,
       alertPassword: false,
     };
   },
   methods: {
     updateProfile() {
+      this.isLoading = true;
       if (this.password === this.confirmNewPassword) {
         const fd = new FormData();
         fd.append("_method", "patch");
@@ -89,9 +91,11 @@ export default {
             },
           })
           .then(() => {
+            this.isLoading = false;
             location.reload();
           })
           .catch(() => {
+            this.isLoading = false;
             this.isError = true;
           });
       }
