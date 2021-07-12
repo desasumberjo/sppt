@@ -5,13 +5,13 @@
     <span class="mx-1">.</span>
     <span class="input-group-text">05</span>
     <span class="mx-1">.</span>
-    <input v-on:keyup.enter="handleSearch" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="3" v-model="number1" class="form-control" />
+    <span class="input-group-text">150</span>
     <span class="mx-1">.</span>
-    <input v-on:keyup.enter="handleSearch" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" type="number" v-model="number2" class="form-control" />
+    <span class="input-group-text">009</span>
     <span class="mx-1">.</span>
-    <input v-on:keyup.enter="handleSearch" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" type="number" v-model="number3" class="form-control" />
+    <input v-on:keyup.enter="handleSearch" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" type="number" v-model="number1" class="form-control" />
     <span class="mx-1">.</span>
-    <input v-on:keyup.enter="handleSearch" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4" type="number" v-model="number4" class="form-control" />
+    <input v-on:keyup.enter="handleSearch" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4" type="number" v-model="number2" class="form-control" />
     <span class="mx-1">.</span>
     <span class="input-group-text">0</span>
     <!-- ?? Button type Submit ?? -->
@@ -36,8 +36,6 @@ export default {
     return {
       number1: "",
       number2: "",
-      number3: "",
-      number4: "",
       result: "",
       nop: "",
       isLoading: false,
@@ -47,7 +45,7 @@ export default {
   methods: {
     handleSearch() {
       this.isLoading = true;
-      this.nop = 3505 + this.number1 + this.number2 + this.number3 + this.number4 + 0;
+      this.nop = 3505150009 + this.number1 + this.number2 + 0;
       axios
         .get("api/v1/sppt/search/" + this.nop, {
           headers: {
