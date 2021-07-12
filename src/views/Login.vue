@@ -12,6 +12,9 @@
           <label for="inputPassword" class="form-label">Password</label>
           <input v-on:keyup.enter="submit" type="password" class="form-control" placeholder="************" v-model="password" required />
         </div>
+        <div class="alert alert-danger" role="alert" v-if="isError">
+          Masukkan Username & Password yang Benar!
+        </div>
         <div class="d-grid gap-2">
           <button @click="submit" class="btn btn-primary" type="submit" :disabled="isLoading"><span v-if="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Masuk</button>
         </div>
@@ -29,6 +32,7 @@ export default {
       username: "",
       password: "",
       isLoading: false,
+      isError: false,
     };
   },
   methods: {
@@ -46,6 +50,10 @@ export default {
             sessionStorage.setItem("token", response.data.data.access_token);
             sessionStorage.setItem("role", response.data.data.user.role);
             this.$router.push({ name: "Pencarian" });
+          })
+          .catch(() => {
+            this.isError = true;
+            this.isLoading = false;
           });
       });
     },
