@@ -21,6 +21,11 @@
     </div>
   </div>
 
+  <div class="mb-3 mt-4">
+    <label class="form-label">Foto Profile</label>
+    <input class="form-control" type="file" @change="onFileChange" />
+  </div>
+
   <div class="row mt-4">
     <div class="col-12">
       <label class="form-label">Kata Sandi Lama</label>
@@ -63,6 +68,7 @@ export default {
       occupation: "",
       username: "",
       email: "",
+      profilePicture: null,
       oldPassword: "",
       password: "",
       confirmNewPassword: "",
@@ -72,6 +78,10 @@ export default {
     };
   },
   methods: {
+    onFileChange(event) {
+      this.profilePicture = event.target.files[0];
+      console.log(this.profilePicture);
+    },
     updateProfile() {
       this.isLoading = true;
       if (this.password === this.confirmNewPassword) {
@@ -81,9 +91,11 @@ export default {
         fd.append("occupation", this.occupation);
         fd.append("username", this.username);
         fd.append("email", this.email);
+        if (this.profilePicture !== null) {
+          fd.append("image", this.profilePicture);
+        }
         fd.append("confirmation_password", this.oldPassword);
         fd.append("new_password", this.password);
-        // fd.append("new_password", this.password);
         axios
           .post("api/v1/profile/update", fd, {
             headers: {
@@ -94,9 +106,10 @@ export default {
             this.isLoading = false;
             location.reload();
           })
-          .catch(() => {
+          .catch((error) => {
             this.isLoading = false;
             this.isError = true;
+            console.log(error.response.data);
           });
       }
     },
