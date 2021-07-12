@@ -82,7 +82,4 @@ input {
   font-weight: 500;
   border-radius: 10px !important;
 }
-.btn {
-  border-radius: 18px;
-}
 </style>
