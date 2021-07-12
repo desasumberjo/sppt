@@ -20,20 +20,9 @@
       </div>
     </div>
     <div class="col">
-      <div class="row">
-        <div class="col">
-          <label class="form-label">Nomor Blok</label>
-          <div class="input-group mb-3">
-            <input class="form-control" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="3" v-model="sendData.nop3" disabled />
-            <input class="ms-3 form-control" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="3" v-model="sendData.nop4" disabled />
-          </div>
-        </div>
-        <div class="col">
-          <label class="form-label">Ketetapan</label>
-          <div class="input-group mb-3">
-            <input type="number" class="form-control" v-model="sendData.determnination" />
-          </div>
-        </div>
+      <label class="form-label">Ketetapan</label>
+      <div class="input-group mb-3">
+        <input type="number" class="form-control" v-model="sendData.determnination" />
       </div>
     </div>
   </div>
@@ -73,9 +62,8 @@ export default {
         nop2: "",
         determnination: "",
         taxPayerName: "",
-        familyID: "",
-        selectedFamilyID: this.familyID,
-        guardianID: "",
+        family: "",
+        guardian: "",
       },
     };
   },
@@ -106,8 +94,8 @@ export default {
       sessionStorage.setItem("blockNumber", this.sendData.nop1 + "." + this.sendData.nop2);
       sessionStorage.setItem("determination", this.sendData.determnination);
       sessionStorage.setItem("taxPayerName", this.sendData.taxPayerName);
-      sessionStorage.setItem("familyId", this.sendData.familyID.match(regex));
-      sessionStorage.setItem("guardianID", this.sendData.guardianID.match(regex));
+      sessionStorage.setItem("familyId", this.sendData.family.match(regex));
+      sessionStorage.setItem("guardianID", this.sendData.guardian.match(regex));
     });
   },
 };

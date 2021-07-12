@@ -66,9 +66,8 @@ export default {
         nop4: "",
         determnination: "",
         taxPayerName: "",
-        familyID: "",
-        selectedFamilyID: this.familyID,
-        guardianID: "",
+        family: "",
+        guardian: "",
       },
     };
   },
@@ -99,8 +98,8 @@ export default {
       sessionStorage.setItem("blockNumber", this.sendData.nop1 + "." + this.sendData.nop2);
       sessionStorage.setItem("determination", this.sendData.determnination);
       sessionStorage.setItem("taxPayerName", this.sendData.taxPayerName);
-      sessionStorage.setItem("familyId", this.sendData.familyID.match(regex));
-      sessionStorage.setItem("guardianID", this.sendData.guardianID.match(regex));
+      sessionStorage.setItem("familyId", this.sendData.family.match(regex));
+      sessionStorage.setItem("guardianID", this.sendData.guardian.match(regex));
     });
   },
 };

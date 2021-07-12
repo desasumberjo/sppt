@@ -70,7 +70,7 @@ export default {
             this.taxPayerName = response.data.data.taxpayer.name;
             this.landArea = response.data.data.tax_object.land_area;
             this.buildingArea = response.data.data.tax_object.building_area;
-            sessionStorage.setItem("nopTarget", 3505 + this.nop.nop1 + this.nop.nop2 + this.nop.nop3 + this.nop.nop4 + 0);
+            sessionStorage.setItem("nopTarget", 3505150009 + this.nop.nop1 + this.nop.nop2 + 0);
           });
       }
     });
