@@ -106,8 +106,8 @@ export default {
   updated: function() {
     this.$nextTick(function() {
       let regex = /\d+/g;
-      sessionStorage.setItem("nop", 3505 + this.sendData.nop1 + this.sendData.nop2 + this.sendData.nop3 + this.sendData.nop4 + 0);
-      sessionStorage.setItem("blockNumber", this.sendData.nop3 + this.sendData.nop4);
+      sessionStorage.setItem("nop", 3505150009 + this.sendData.nop1 + this.sendData.nop2 + 0);
+      sessionStorage.setItem("blockNumber", this.sendData.nop1 + this.sendData.nop2);
       sessionStorage.setItem("determination", this.sendData.determnination);
       sessionStorage.setItem("taxPayerName", this.sendData.taxPayerName);
       sessionStorage.setItem("family", this.sendData.family.match(regex));
