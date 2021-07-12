@@ -8,32 +8,21 @@
         <span class="mx-1">.</span>
         <span class="input-group-text">05</span>
         <span class="mx-1">.</span>
+        <span class="input-group-text">150</span>
+        <span class="mx-1">.</span>
+        <span class="input-group-text">009</span>
+        <span class="mx-1">.</span>
         <input class="form-control" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="3" v-model="sendData.nop1" />
         <span class="mx-1">.</span>
-        <input class="form-control" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="3" v-model="sendData.nop2" />
-        <span class="mx-1">.</span>
-        <input class="form-control" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="3" v-model="sendData.nop3" />
-        <span class="mx-1">.</span>
-        <input class="form-control" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="4" v-model="sendData.nop4" />
+        <input class="form-control" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="4" v-model="sendData.nop2" />
         <span class="mx-1">.</span>
         <span class="input-group-text">0</span>
       </div>
     </div>
     <div class="col">
-      <div class="row">
-        <div class="col">
-          <label class="form-label">Nomor Blok</label>
-          <div class="input-group mb-3">
-            <input class="form-control" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="3" v-model="sendData.nop3" disabled />
-            <input class="ms-3 form-control" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="3" v-model="sendData.nop4" disabled />
-          </div>
-        </div>
-        <div class="col">
-          <label class="form-label">Ketetapan</label>
-          <div class="input-group mb-3">
-            <input type="number" class="form-control" v-model="sendData.determnination" />
-          </div>
-        </div>
+      <label class="form-label">Ketetapan</label>
+      <div class="input-group mb-3">
+        <input type="number" class="form-control" v-model="sendData.determnination" />
       </div>
     </div>
   </div>
@@ -71,8 +60,6 @@ export default {
       sendData: {
         nop1: "",
         nop2: "",
-        nop3: "",
-        nop4: "",
         determnination: "",
         taxPayerName: "",
         family: "",
@@ -101,11 +88,8 @@ export default {
       });
     let data = JSON.parse(sessionStorage.getItem("data"));
     let nop = data.tax_object.nop;
-    // 350515000901500770
-    this.sendData.nop1 = nop.substr(4, 3);
-    this.sendData.nop2 = nop.substr(7, 3);
-    this.sendData.nop3 = nop.substr(10, 3);
-    this.sendData.nop4 = nop.substr(13, 4);
+    this.sendData.nop1 = nop.substr(10, 3);
+    this.sendData.nop2 = nop.substr(13, 4);
     this.sendData.determnination = data.tax_object.determination;
     this.sendData.taxPayerName = data.taxpayer.name;
     this.sendData.family = data.taxpayer.family.id + " - " + data.taxpayer.family.name;
