@@ -8,13 +8,13 @@
         <span class="mx-1">.</span>
         <span class="input-group-text">05</span>
         <span class="mx-1">.</span>
-        <input type="number" class="form-control" maxlength="5" v-model="sendData.nop1" />
+        <span class="input-group-text">150</span>
+        <span class="mx-1">.</span>
+        <span class="input-group-text">009</span>
+        <span class="mx-1">.</span>
+        <input type="number" class="form-control" v-model="sendData.nop1" />
         <span class="mx-1">.</span>
         <input type="number" class="form-control" v-model="sendData.nop2" />
-        <span class="mx-1">.</span>
-        <input type="number" class="form-control" v-model="sendData.nop3" />
-        <span class="mx-1">.</span>
-        <input type="number" class="form-control" v-model="sendData.nop4" />
         <span class="mx-1">.</span>
         <span class="input-group-text">0</span>
       </div>
@@ -71,10 +71,6 @@ export default {
       sendData: {
         nop1: "",
         nop2: "",
-        nop3: "",
-        nop4: "",
-        blockNumber1: "",
-        blockNumber2: "",
         determnination: "",
         taxPayerName: "",
         familyID: "",
@@ -106,8 +102,8 @@ export default {
   updated: function() {
     this.$nextTick(function() {
       let regex = /\d+/g;
-      sessionStorage.setItem("nop", 3505 + this.sendData.nop1 + this.sendData.nop2 + this.sendData.nop3 + this.sendData.nop4 + 0);
-      sessionStorage.setItem("blockNumber", this.sendData.nop3 + "." + this.sendData.nop4);
+      sessionStorage.setItem("nop", 3505150009 + this.sendData.nop1 + this.sendData.nop2 + 0);
+      sessionStorage.setItem("blockNumber", this.sendData.nop1 + "." + this.sendData.nop2);
       sessionStorage.setItem("determination", this.sendData.determnination);
       sessionStorage.setItem("taxPayerName", this.sendData.taxPayerName);
       sessionStorage.setItem("familyId", this.sendData.familyID.match(regex));
