@@ -8,35 +8,26 @@
         <span class="mx-1">.</span>
         <span class="input-group-text">05</span>
         <span class="mx-1">.</span>
-        <input type="number" class="form-control" maxlength="5" v-model="sendData.nop1" />
+        <span class="input-group-text">150</span>
+        <span class="mx-1">.</span>
+        <span class="input-group-text">009</span>
+        <span class="mx-1">.</span>
+        <input type="number" class="form-control" v-model="sendData.nop1" />
         <span class="mx-1">.</span>
         <input type="number" class="form-control" v-model="sendData.nop2" />
-        <span class="mx-1">.</span>
-        <input type="number" class="form-control" v-model="sendData.nop3" />
-        <span class="mx-1">.</span>
-        <input type="number" class="form-control" v-model="sendData.nop4" />
         <span class="mx-1">.</span>
         <span class="input-group-text">0</span>
       </div>
     </div>
+
     <div class="col">
-      <div class="row">
-        <div class="col">
-          <label class="form-label">Nomor Blok</label>
-          <div class="input-group mb-3">
-            <input class="form-control" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="3" v-model="sendData.nop3" disabled />
-            <input class="ms-3 form-control" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="3" v-model="sendData.nop4" disabled />
-          </div>
-        </div>
-        <div class="col">
-          <label class="form-label">Ketetapan</label>
-          <div class="input-group mb-3">
-            <input type="number" class="form-control" v-model="sendData.determnination" />
-          </div>
-        </div>
+      <label class="form-label">Ketetapan</label>
+      <div class="input-group mb-3">
+        <input type="number" class="form-control" v-model="sendData.determnination" />
       </div>
     </div>
   </div>
+
   <div>
     <label class="form-label">Nama Wajib Pajak</label>
     <input type="text" class="form-control" v-model="sendData.taxPayerName" />
@@ -75,9 +66,8 @@ export default {
         nop4: "",
         determnination: "",
         taxPayerName: "",
-        familyID: "",
-        selectedFamilyID: this.familyID,
-        guardianID: "",
+        family: "",
+        guardian: "",
       },
     };
   },
@@ -104,12 +94,12 @@ export default {
   updated: function() {
     this.$nextTick(function() {
       let regex = /\d+/g;
-      sessionStorage.setItem("nop", 3505 + this.sendData.nop1 + this.sendData.nop2 + this.sendData.nop3 + this.sendData.nop4 + 0);
-      sessionStorage.setItem("blockNumber", this.sendData.nop3 + "." + this.sendData.nop4);
+      sessionStorage.setItem("nop", 3505150009 + this.sendData.nop1 + this.sendData.nop2 + 0);
+      sessionStorage.setItem("blockNumber", this.sendData.nop1 + "." + this.sendData.nop2);
       sessionStorage.setItem("determination", this.sendData.determnination);
       sessionStorage.setItem("taxPayerName", this.sendData.taxPayerName);
-      sessionStorage.setItem("familyId", this.sendData.familyID.match(regex));
-      sessionStorage.setItem("guardianID", this.sendData.guardianID.match(regex));
+      sessionStorage.setItem("familyId", this.sendData.family.match(regex));
+      sessionStorage.setItem("guardianID", this.sendData.guardian.match(regex));
     });
   },
 };
@@ -133,6 +123,10 @@ input {
 }
 option {
   border-radius: 10px !important;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+label {
   font-family: "Poppins", sans-serif;
   font-weight: 500;
 }

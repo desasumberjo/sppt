@@ -74,9 +74,10 @@ export default {
           sessionStorage.removeItem("nopTarget"), sessionStorage.removeItem("nop"), sessionStorage.removeItem("blockNumber"), sessionStorage.removeItem("determination"), sessionStorage.removeItem("taxPayerName"), sessionStorage.removeItem("familyId"), sessionStorage.removeItem("guardianID"), sessionStorage.removeItem("taxPayerRoad"), sessionStorage.removeItem("taxPayerRT"), sessionStorage.removeItem("taxPayerRW"), sessionStorage.removeItem("taxPayerVillage"), sessionStorage.removeItem("taxObjectRoad"), sessionStorage.removeItem("taxObjectRT"), sessionStorage.removeItem("taxObjectRW"), sessionStorage.removeItem("taxObjectVillage"), sessionStorage.removeItem("spptPersilNumber"), sessionStorage.removeItem("landArea"), sessionStorage.removeItem("buildingArea"), this.$router.push({ name: "Pencarian" });
           this.isLoading = false;
         })
-        .catch(() => {
+        .catch((error) => {
           this.isLoading = false;
           this.isError = true;
+          console.log(error.response.data);
         });
     },
   },

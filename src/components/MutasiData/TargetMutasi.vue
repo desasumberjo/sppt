@@ -8,13 +8,13 @@
         <span class="mx-1">.</span>
         <span class="input-group-text">05</span>
         <span class="mx-1">.</span>
+        <span class="input-group-text">150</span>
+        <span class="mx-1">.</span>
+        <span class="input-group-text">009</span>
+        <span class="mx-1">.</span>
         <input type="text" class="form-control" v-model="nop.nop1" />
         <span class="mx-1">.</span>
         <input type="text" class="form-control" v-model="nop.nop2" />
-        <span class="mx-1">.</span>
-        <input type="text" class="form-control" v-model="nop.nop3" />
-        <span class="mx-1">.</span>
-        <input type="text" class="form-control" v-model="nop.nop4" />
         <span class="mx-1">.</span>
         <span class="input-group-text">0</span>
       </div>
@@ -49,8 +49,6 @@ export default {
       nop: {
         nop1: "",
         nop2: "",
-        nop3: "",
-        nop4: "",
       },
       tes: "tes",
       taxPayerName: "",
@@ -60,7 +58,7 @@ export default {
   },
   updated: function() {
     this.$nextTick(function() {
-      let finalNOP = 3505 + this.nop.nop1 + this.nop.nop2 + this.nop.nop3 + this.nop.nop4 + 0;
+      let finalNOP = 3505150009 + this.nop.nop1 + this.nop.nop2 + 0;
       if (finalNOP > 111111111111111110) {
         axios
           .get("api/v1/sppt/" + finalNOP, {
@@ -72,7 +70,7 @@ export default {
             this.taxPayerName = response.data.data.taxpayer.name;
             this.landArea = response.data.data.tax_object.land_area;
             this.buildingArea = response.data.data.tax_object.building_area;
-            sessionStorage.setItem("nopTarget", 3505 + this.nop.nop1 + this.nop.nop2 + this.nop.nop3 + this.nop.nop4 + 0);
+            sessionStorage.setItem("nopTarget", 3505150009 + this.nop.nop1 + this.nop.nop2 + 0);
           });
       }
     });
@@ -93,6 +91,10 @@ input {
 }
 .input-group-text {
   border-radius: 10px !important;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+label {
   font-family: "Poppins", sans-serif;
   font-weight: 500;
 }
