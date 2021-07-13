@@ -2,21 +2,19 @@
   <table class="table">
     <thead class="table-secondary">
       <tr>
-        <th>Nama</th>
         <th>NOP</th>
-        <th>ID Pamong</th>
-        <th>Luas Lahan</th>
-        <th>Luas Bangunan</th>
+        <th>Jumlah</th>
+        <th>Tahun</th>
+        <th>Status Pembayaran</th>
         <th>Aksi</th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="result in resultData" :key="result.id">
-        <td>{{ result.taxpayer.name }}</td>
-        <td>{{ result.tax_object.nop }}</td>
-        <td class="text-center">{{ result.tax_object.guardian_id }}</td>
-        <td class="text-center">{{ result.tax_object.land_area }} m<sup>2</sup></td>
-        <td class="text-center">{{ result.tax_object.building_area }} m<sup>2</sup></td>
+      <tr v-for="result in results" :key="result">
+        <td>{{ nop }}</td>
+        <td>Rp. {{ result.amount }}</td>
+        <td>{{ result.year }}</td>
+        <td>{{ result.payment_status }}</td>
         <td>
           <svg @click="edit(result)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
@@ -41,47 +39,26 @@
 <script>
 import axios from "axios";
 export default {
-  props: ["resultData"],
   data() {
     return {
-      hasilPencarian: null,
+      nop: "",
+      results: null,
     };
   },
-  methods: {
-    edit(result) {
-      sessionStorage.setItem("data", JSON.stringify(result));
-      this.$router.push({ name: "EditSPPT" });
-    },
-    handlerTax(id) {
-      sessionStorage.setItem("spptID", id);
-      this.$router.push({ name: "Tax" });
-    },
-    deleteData(id) {
-      axios
-        .delete("api/v1/sppt/delete/" + id, {
-          headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-          },
-        })
-        .then(() => {
-          window.location.reload();
-        });
-    },
+  mounted: function() {
+    axios
+      .get("api/v1/sppt/tax-histories/" + sessionStorage.getItem("spptID"), {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        },
+      })
+      .then((response) => {
+        // console.log(response.data.data);
+        // console.log(response.data.data);
+        this.nop = response.data.data.sppt.nop;
+        this.results = response.data.data.tax_histories;
+        console.log(this.results);
+      });
   },
 };
 </script>
-
-<style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
-th {
-  font-family: "Poppins", sans-serif;
-  font-weight: 600;
-}
-td {
-  font-family: "Poppins", sans-serif;
-  font-weight: 400;
-}
-svg {
-  cursor: pointer;
-}
-</style>
