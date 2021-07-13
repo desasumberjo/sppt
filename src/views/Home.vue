@@ -29,12 +29,15 @@ export default {
 
 <style scoped>
 .container-home {
-  height: 100vh;
+  width: 100%;
+  height: 100%;
+  position: absolute;
   background-color: #b0bec5 !important;
 }
 .pencarian {
   padding: 10px;
   border-radius: 30px !important;
+
   /* background-color: #fff !important; */
 }
 </style>

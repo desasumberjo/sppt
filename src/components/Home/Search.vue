@@ -8,9 +8,9 @@
     <span class="mx-1">.</span>
     <span class="input-group-text">009</span>
     <span class="mx-1">.</span>
-    <input type="number" class="form-control" />
+    <input v-on:keyup.enter="handleSearch" type="number" class="form-control" v-model="nop1" />
     <span class="mx-1">.</span>
-    <input type="number" class="form-control" />
+    <input v-on:keyup.enter="handleSearch" type="number" class="form-control" v-model="nop2" />
     <span class="mx-1">.</span>
     <span class="input-group-text">0</span>
     <button type="submit" @click="handleSearch" class="btn btn-primary mx-1 btn-sm ms-3" :disabled="isLoading">
@@ -20,11 +20,12 @@
   </div>
   <div class="container-table p-3 mt-3">
     <TableDisplay v-if="tableDisplay" />
-    <TableData v-if="!tableDisplay" />
+    <TableData :resultData="result" v-if="!tableDisplay" />
   </div>
 </template>
 
 <script>
+import axios from "axios";
 import TableDisplay from "./TableDisplay.vue";
 import TableData from "./TableData.vue";
 export default {
@@ -32,12 +33,26 @@ export default {
   components: { TableDisplay, TableData },
   data() {
     return {
+      nop1: "",
+      nop2: "",
+      result: "",
+      isLoading: false,
       tableDisplay: true,
     };
   },
   methods: {
     handleSearch() {
+      this.isLoading = true;
       this.tableDisplay = false;
+      axios
+        .get("/api/v1/sppt/search/" + 3505150009 + this.nop1 + this.nop2 + 0)
+        .then((response) => {
+          this.result = response.data.data;
+          this.isLoading = false;
+        })
+        .catch(() => {
+          this.isLoading = false;
+        });
     },
   },
 };
