@@ -11,11 +11,11 @@
     </thead>
     <tbody>
       <tr v-for="result in resultData" :key="result.id">
-        <td @click="detail(result.tax_object.nop)" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ result.taxpayer.name }}</td>
-        <td @click="detail(result.tax_object.nop)" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ result.tax_object.nop }}</td>
-        <td @click="detail(result.tax_object.nop)" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ result.tax_object.guardian_id }}</td>
-        <td @click="detail(result.tax_object.nop)" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ result.tax_object.land_area }} m<sup>2</sup></td>
-        <td @click="detail(result.tax_object.nop)" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ result.tax_object.building_area }} m<sup>2</sup></td>
+        <td @click="detail(result)" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ result.taxpayer.name }}</td>
+        <td @click="detail(result)" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ result.tax_object.nop }}</td>
+        <td @click="detail(result)" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ result.tax_object.guardian_id }}</td>
+        <td @click="detail(result)" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ result.tax_object.land_area }} m<sup>2</sup></td>
+        <td @click="detail(result)" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ result.tax_object.building_area }} m<sup>2</sup></td>
       </tr>
     </tbody>
   </table>
@@ -35,6 +35,23 @@
           <p>Keluarga : {{ modalData.family }}</p>
           <p>Luas Lahan : {{ modalData.landArea }} m<sup>2</sup></p>
           <p>Luas Bangunan : {{ modalData.buildingArea }} m<sup>2</sup></p>
+          <h3>Info Pajak</h3>
+          <table class="table">
+            <thead class="table-secondary">
+              <tr>
+                <th>Jumlah</th>
+                <th>Tahun</th>
+                <th>Status Pembayaran</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="taxHistory in modalData.taxHistories" :key="taxHistory.id">
+                <td>{{ taxHistory.amount }}</td>
+                <td>{{ taxHistory.year }}</td>
+                <td>{{ taxHistory.payment_status }}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -57,13 +74,15 @@ export default {
         family: "",
         landArea: "",
         buildingArea: "",
+        taxHistories: "",
       },
     };
   },
   methods: {
-    detail(id) {
-      this.id = id;
-      axios.get("api/v1/sppt/" + this.id).then((response) => {
+    detail(result) {
+      let sppt = result.tax_object.nop;
+      let id = result.id;
+      axios.get("api/v1/sppt/" + sppt).then((response) => {
         this.modalData.name = response.data.data.taxpayer.name;
         this.modalData.nop = response.data.data.tax_object.nop;
         this.modalData.road = response.data.data.taxpayer.address.road;
@@ -73,6 +92,9 @@ export default {
         this.modalData.family = response.data.data.taxpayer.family.name;
         this.modalData.landArea = response.data.data.tax_object.land_area;
         this.modalData.buildingArea = response.data.data.tax_object.building_area;
+      });
+      axios.get("api/v1/sppt/tax-histories/" + id).then((response) => {
+        this.modalData.taxHistories = response.data.data.tax_histories;
       });
     },
   },
