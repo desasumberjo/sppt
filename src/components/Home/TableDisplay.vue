@@ -29,7 +29,6 @@ export default {
   },
   mounted: function() {
     axios.get("/api/v1/sppts").then((response) => {
-      console.log(response.data.data.data);
       this.results = response.data.data.data;
     });
   },

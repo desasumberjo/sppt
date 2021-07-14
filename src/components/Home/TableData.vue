@@ -12,10 +12,10 @@
     <tbody>
       <tr v-for="result in resultData" :key="result.id">
         <td>{{ result.taxpayer.name }}</td>
-        <td>123456789</td>
-        <td class="text-center">7</td>
-        <td class="text-center">1000 m<sup>2</sup></td>
-        <td class="text-center">1000 m<sup>2</sup></td>
+        <td>{{ result.tax_object.nop }}</td>
+        <td>{{ result.tax_object.guardian_id }}</td>
+        <td>{{ result.tax_object.land_area }} m<sup>2</sup></td>
+        <td>{{ result.tax_object.building_area }} m<sup>2</sup></td>
       </tr>
     </tbody>
   </table>
