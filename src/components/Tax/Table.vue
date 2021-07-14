@@ -1,5 +1,5 @@
 <template>
-  <table class="table">
+  <table class="table table-hover">
     <thead class="table-secondary">
       <tr>
         <th>NOP</th>
@@ -11,10 +11,10 @@
     </thead>
     <tbody>
       <tr v-for="result in results" :key="result">
-        <td>{{ nop }}</td>
-        <td>Rp. {{ result.amount }}</td>
-        <td>{{ result.year }}</td>
-        <td>{{ result.payment_status }}</td>
+        <td @click="detail(result.id)" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ nop }}</td>
+        <td @click="detail(result.id)" data-bs-toggle="modal" data-bs-target="#exampleModal">Rp. {{ result.amount }}</td>
+        <td @click="detail(result.id)" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ result.year }}</td>
+        <td @click="detail(result.id)" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ result.payment_status }}</td>
         <td>
           <svg @click="edit(result)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
@@ -29,6 +29,23 @@
       </tr>
     </tbody>
   </table>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Detail</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Nama : {{ modalData.name }}</p>
+          <p>NOP : {{ modalData.nop }}</p>
+          <p>Tahun : {{ modalData.year }}</p>
+          <p>Jumlah : {{ modalData.amount }}</p>
+          <p>Status Pembayaran : {{ modalData.paymentStatus }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -38,9 +55,26 @@ export default {
     return {
       nop: "",
       results: null,
+      modalData: {
+        name: "",
+        nop: "",
+        year: "",
+        amount: "",
+        paymentStatus: "",
+      },
     };
   },
   methods: {
+    detail(id) {
+      axios.get("api/v1/sppt/tax-history/" + id).then((response) => {
+        let sppt = response.data.data.sppt;
+        this.modalData.name = sppt.taxpayer_name;
+        this.modalData.nop = sppt.nop;
+        this.modalData.year = response.data.data.tax_histories.year;
+        this.modalData.amount = response.data.data.tax_histories.amount;
+        this.modalData.paymentStatus = response.data.data.tax_histories.payment_status;
+      });
+    },
     edit(result) {
       console.log(result);
       sessionStorage.setItem("data", JSON.stringify(result));
@@ -75,6 +109,9 @@ export default {
 
 <style>
 svg {
+  cursor: pointer;
+}
+td {
   cursor: pointer;
 }
 </style>
