@@ -1,5 +1,5 @@
 <template>
-  <table class="table">
+  <table class="table table-hover">
     <thead class="table-secondary">
       <tr>
         <th>Nama</th>
@@ -81,3 +81,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+td {
+  cursor: pointer;
+}
+</style>
