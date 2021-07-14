@@ -19,12 +19,6 @@
         <span class="input-group-text">0</span>
       </div>
     </div>
-    <div class="col">
-      <label class="form-label">Ketetapan</label>
-      <div class="input-group mb-3">
-        <input type="number" class="form-control" v-model="sendData.determnination" />
-      </div>
-    </div>
   </div>
   <div>
     <label class="form-label">Nama Wajib Pajak</label>
@@ -60,7 +54,6 @@ export default {
       sendData: {
         nop1: "",
         nop2: "",
-        determnination: "",
         taxPayerName: "",
         family: "",
         guardian: "",
@@ -92,7 +85,6 @@ export default {
       let regex = /\d+/g;
       sessionStorage.setItem("nop", 3505150009 + this.sendData.nop1 + this.sendData.nop2 + 0);
       sessionStorage.setItem("blockNumber", this.sendData.nop1 + "." + this.sendData.nop2);
-      sessionStorage.setItem("determination", this.sendData.determnination);
       sessionStorage.setItem("taxPayerName", this.sendData.taxPayerName);
       sessionStorage.setItem("familyId", this.sendData.family.match(regex));
       sessionStorage.setItem("guardianID", this.sendData.guardian.match(regex));
