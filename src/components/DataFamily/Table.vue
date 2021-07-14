@@ -1,5 +1,5 @@
 <template>
-  <table class="table">
+  <table class="table table-hover">
     <thead class="table-secondary">
       <tr>
         <th>ID</th>
@@ -10,7 +10,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="result in resultData" :key="result.id">
+      <tr @click="detail(result)" v-for="result in resultData" :key="result.id" data-bs-toggle="modal" data-bs-target="#exampleModal">
         <td>{{ result.id }}</td>
         <td>{{ result.name }}</td>
         <td>{{ result.rt }}</td>
@@ -29,6 +29,22 @@
       </tr>
     </tbody>
   </table>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Detail</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Nama : {{ modalData.name }}</p>
+          <p>Jalan : {{ modalData.road }}</p>
+          <p>Desa : {{ modalData.village }}</p>
+          <p>RT / RW : {{ modalData.rt }} / {{ modalData.rw }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -38,9 +54,23 @@ export default {
   data() {
     return {
       result: null,
+      modalData: {
+        name: "",
+        road: "",
+        village: "",
+        rt: "",
+        rw: "",
+      },
     };
   },
   methods: {
+    detail(result) {
+      this.modalData.name = result.name;
+      this.modalData.road = result.road;
+      this.modalData.village = result.village;
+      this.modalData.rt = result.rt;
+      this.modalData.rw = result.rw;
+    },
     editFamily(id) {
       sessionStorage.setItem("idFamily", id);
       this.$router.push({ name: "EditFamily" });
@@ -73,6 +103,7 @@ th {
 td {
   font-family: "Poppins", sans-serif;
   font-weight: 400;
+  cursor: pointer;
 }
 svg {
   cursor: pointer;
