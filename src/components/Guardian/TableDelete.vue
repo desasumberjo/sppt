@@ -13,6 +13,9 @@
       </datalist>
     </div>
   </div>
+  <div class="alert alert-warning my-3" role="alert">
+    Sebelum menghapus pamong, pastikan data yang terkait dipindahkan terlebih dahulu!
+  </div>
   <table class="table my-4">
     <thead class="table-secondary">
       <tr>
