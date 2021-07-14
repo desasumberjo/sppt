@@ -132,7 +132,7 @@ export default {
     logout() {
       axios
         .post(
-          "api/v1/logout",
+          "api/logout",
           {},
           {
             headers: {
