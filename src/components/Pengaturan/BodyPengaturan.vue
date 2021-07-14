@@ -26,21 +26,17 @@
     <input class="form-control" type="file" @change="onFileChange" />
   </div>
 
-  <div class="row mt-4">
-    <div class="col-12">
-      <label class="form-label">Kata Sandi Lama</label>
-      <input v-on:keyup.enter="updateProfile" v-model="oldPassword" type="password" class="form-control" />
-    </div>
+  <div class="row">
     <div class="col-12 mt-4">
       <label class="form-label">Kata Sandi Baru</label>
-      <input v-on:keyup.enter="updateProfile" v-model="password" type="password" class="form-control" />
+      <input placeholder="Kata sandi bisa dikosongi jika tidak diubah" v-on:keyup.enter="updateProfile" v-model="password" type="password" class="form-control" />
       <div class="form-text">
         Password harus memiliki 8 karakter
       </div>
     </div>
     <div class="col-12 mt-4">
       <label class="form-label">Ulangi Kata Sandi</label>
-      <input v-on:keyup.enter="updateProfile" v-model="confirmNewPassword" type="password" class="form-control" />
+      <input placeholder="Kata sandi bisa dikosongi jika tidak diubah" v-on:keyup.enter="updateProfile" v-model="confirmNewPassword" type="password" class="form-control" />
       <div class="form-text" v-if="!alertPassword">
         Password harus memiliki 8 karakter
       </div>
@@ -69,7 +65,6 @@ export default {
       username: "",
       email: "",
       profilePicture: null,
-      oldPassword: "",
       password: "",
       confirmNewPassword: "",
       isLoading: false,
