@@ -18,6 +18,9 @@
       <span v-if="!isLoading">Cari</span>
     </button>
   </div>
+  <div class="alert alert-danger mt-3" v-if="alert" role="alert">
+    Data Tidak Ditemukan!
+  </div>
   <div class="container-table p-3 mt-3">
     <TableDisplay v-if="tableDisplay" />
     <TableData :resultData="result" v-if="!tableDisplay" />
@@ -38,20 +41,24 @@ export default {
       result: "",
       isLoading: false,
       tableDisplay: true,
+      alert: false,
     };
   },
   methods: {
     handleSearch() {
       this.isLoading = true;
-      this.tableDisplay = false;
       axios
         .get("/api/v1/sppt/search/" + 3505150009 + this.nop1 + this.nop2 + 0)
         .then((response) => {
+          this.tableDisplay = false;
           this.result = response.data.data;
           this.isLoading = false;
+          this.alert = false;
         })
         .catch(() => {
           this.isLoading = false;
+          this.alert = true;
+          this.tableDisplay = true;
         });
     },
   },
