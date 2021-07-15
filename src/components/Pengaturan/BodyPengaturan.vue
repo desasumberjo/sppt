@@ -37,14 +37,14 @@
     <div class="col-12 mt-4">
       <label class="form-label">Ulangi Kata Sandi</label>
       <input placeholder="Kata sandi bisa dikosongi jika tidak diubah" v-on:keyup.enter="updateProfile" v-model="confirmNewPassword" type="password" class="form-control" />
-      <div class="form-text" v-if="!alertPassword">
+      <div class="form-text">
         Password harus memiliki 8 karakter
       </div>
       <div class="form-text" style="color: red" v-if="alertPassword">
         Password tidak Sesuai
       </div>
       <div class="alert alert-danger mt-4" role="alert" v-if="isError">
-        Data yang anda masukkan Belum Lengkap
+        Data yang Anda Masukkan Belum Lengkap
       </div>
     </div>
   </div>
@@ -75,11 +75,10 @@ export default {
   methods: {
     onFileChange(event) {
       this.profilePicture = event.target.files[0];
-      console.log(this.profilePicture);
     },
     updateProfile() {
       this.isLoading = true;
-      if (this.password === this.confirmNewPassword) {
+      if (this.password === "" || this.confirmNewPassword === "") {
         const fd = new FormData();
         fd.append("_method", "patch");
         fd.append("name", this.name);
@@ -89,8 +88,6 @@ export default {
         if (this.profilePicture !== null) {
           fd.append("image", this.profilePicture);
         }
-        fd.append("confirmation_password", this.oldPassword);
-        fd.append("new_password", this.password);
         axios
           .post("api/v1/profile/update", fd, {
             headers: {
@@ -106,6 +103,37 @@ export default {
             this.isError = true;
             console.log(error.response.data);
           });
+      } else {
+        if (this.password === this.confirmNewPassword) {
+          const fd = new FormData();
+          fd.append("_method", "patch");
+          fd.append("name", this.name);
+          fd.append("occupation", this.occupation);
+          fd.append("username", this.username);
+          fd.append("email", this.email);
+          if (this.profilePicture !== null) {
+            fd.append("image", this.profilePicture);
+          }
+          fd.append("confirmation_password", this.oldPassword);
+          fd.append("new_password", this.password);
+          axios
+            .post("api/v1/profile/update", fd, {
+              headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+              },
+            })
+            .then(() => {
+              this.isLoading = false;
+              location.reload();
+            })
+            .catch((error) => {
+              this.isLoading = false;
+              this.isError = true;
+              console.log(error.response.data);
+            });
+        } else {
+          alert("Password tidak Sesuai");
+        }
       }
     },
   },
