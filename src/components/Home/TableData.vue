@@ -80,6 +80,7 @@ export default {
   },
   methods: {
     detail(result) {
+      this.modalData.taxHistories = "";
       let sppt = result.tax_object.nop;
       let id = result.id;
       axios.get("api/v1/sppt/" + sppt).then((response) => {
