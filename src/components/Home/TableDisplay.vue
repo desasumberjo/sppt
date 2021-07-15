@@ -12,8 +12,8 @@
       <tr v-for="result in results" :key="result.id">
         <td @click="detail(result)" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ result.taxpayer.name }}</td>
         <td @click="detail(result)" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ result.tax_object.nop }}</td>
-        <td @click="detail(result.tax_object.nop)" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ result.tax_object.land_area }} m<sup>2</sup></td>
-        <td @click="detail(result.tax_object.nop)" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ result.tax_object.building_area }} m<sup>2</sup></td>
+        <td @click="detail(result)" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ result.tax_object.land_area }} m<sup>2</sup></td>
+        <td @click="detail(result)" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ result.tax_object.building_area }} m<sup>2</sup></td>
       </tr>
     </tbody>
   </table>
