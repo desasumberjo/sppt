@@ -12,10 +12,20 @@
 </template>
 
 <script>
-import Aside from '../components/Aside.vue'
-import FormEditKeluarga from '../components/DataFamily/FormEditKeluarga.vue'
+import Aside from "../components/Aside.vue";
+import FormEditKeluarga from "../components/DataFamily/FormEditKeluarga.vue";
+import { useRouter } from "vue-router";
 export default {
-  components: {Aside, FormEditKeluarga},
-  name: 'EditFamily',
-}
+  components: { Aside, FormEditKeluarga },
+  name: "EditFamily",
+  mounted: function() {
+    const token = sessionStorage.getItem("token");
+    const router = useRouter();
+    if (!token) {
+      return router.push({
+        name: "Login",
+      });
+    }
+  },
+};
 </script>

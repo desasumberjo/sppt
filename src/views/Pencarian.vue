@@ -14,10 +14,20 @@
 </template>
 
 <script>
-import Aside from '../components/Aside.vue'
-import Search from '../components/Pencarian/Search.vue'
+import Aside from "../components/Aside.vue";
+import Search from "../components/Pencarian/Search.vue";
+import { useRouter } from "vue-router";
 export default {
-  components: {Aside, Search},
-  name: 'Pencarian',
-}
+  components: { Aside, Search },
+  name: "Pencarian",
+  mounted: function() {
+    const token = sessionStorage.getItem("token");
+    const router = useRouter();
+    if (!token) {
+      return router.push({
+        name: "Login",
+      });
+    }
+  },
+};
 </script>

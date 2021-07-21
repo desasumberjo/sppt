@@ -16,8 +16,18 @@
 <script>
 import Aside from "../components/Aside.vue";
 import TableDelete from "../components/DataFamily/TableDelete.vue";
+import { useRouter } from "vue-router";
 export default {
   components: { Aside, TableDelete },
   name: "DeleteFamily",
+  mounted: function() {
+    const token = sessionStorage.getItem("token");
+    const router = useRouter();
+    if (!token) {
+      return router.push({
+        name: "Login",
+      });
+    }
+  },
 };
 </script>

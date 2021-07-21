@@ -25,6 +25,7 @@ import axios from "axios";
 import Aside from "../components/Aside.vue";
 import DataPersonal from "../components/EditSPPT/DataPersonal.vue";
 import DataAlamat from "../components/EditSPPT/DataAlamat.vue";
+import { useRouter } from "vue-router";
 export default {
   components: { Aside, DataPersonal, DataAlamat },
   name: "EditSPPT",
@@ -80,6 +81,15 @@ export default {
           console.log(error.response.data);
         });
     },
+  },
+  mounted: function() {
+    const token = sessionStorage.getItem("token");
+    const router = useRouter();
+    if (!token) {
+      return router.push({
+        name: "Login",
+      });
+    }
   },
 };
 </script>

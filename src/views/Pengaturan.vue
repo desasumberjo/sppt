@@ -16,8 +16,18 @@
 import Aside from "../components/Aside.vue";
 import HeaderPengaturan from "../components/Pengaturan/HeaderPengaturan.vue";
 import BodyPengaturan from "../components/Pengaturan/BodyPengaturan.vue";
+import { useRouter } from "vue-router";
 export default {
   components: { Aside, HeaderPengaturan, BodyPengaturan },
   name: "Pengaturan",
+  mounted: function() {
+    const token = sessionStorage.getItem("token");
+    const router = useRouter();
+    if (!token) {
+      return router.push({
+        name: "Login",
+      });
+    }
+  },
 };
 </script>

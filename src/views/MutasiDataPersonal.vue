@@ -27,6 +27,7 @@ import Aside from "../components/Aside.vue";
 import DataPersonal from "../components/MutasiData/DataPersonal.vue";
 import DataAlamat from "../components/MutasiData/DataAlamat.vue";
 import DataMutasi from "../components/MutasiData/TargetMutasi.vue";
+import { useRouter } from "vue-router";
 export default {
   components: { Aside, DataPersonal, DataAlamat, DataMutasi },
   name: "MutasiDataPersonal",
@@ -80,6 +81,15 @@ export default {
           console.log(error.response.data);
         });
     },
+  },
+  mounted: function() {
+    const token = sessionStorage.getItem("token");
+    const router = useRouter();
+    if (!token) {
+      return router.push({
+        name: "Login",
+      });
+    }
   },
 };
 </script>

@@ -25,6 +25,7 @@ import axios from "axios";
 import Aside from "../components/Aside.vue";
 import DataPersonal from "../components/TambahData/DataPersonal.vue";
 import DataAlamat from "../components/TambahData/DataAlamat.vue";
+import { useRouter } from "vue-router";
 export default {
   components: { Aside, DataPersonal, DataAlamat },
   data() {
@@ -76,6 +77,15 @@ export default {
           this.isError = true;
         });
     },
+  },
+  mounted: function() {
+    const token = sessionStorage.getItem("token");
+    const router = useRouter();
+    if (!token) {
+      return router.push({
+        name: "Login",
+      });
+    }
   },
 };
 </script>
