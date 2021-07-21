@@ -16,7 +16,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="result in result" :key="result.id">
+      <tr v-for="result in results" :key="result.id">
         <td>{{ result.id }}</td>
         <td>{{ result.name }}</td>
         <td>
@@ -40,7 +40,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      result: "",
+      results: "",
     };
   },
   methods: {
@@ -59,7 +59,7 @@ export default {
           },
         })
         .then(() => {
-          window.location.reload();
+          this.results.splice(this.results.indexOf(id), 1);
         })
         .catch(() => {
           sessionStorage.setItem("IDGuardian", id);
@@ -75,7 +75,7 @@ export default {
         },
       })
       .then((response) => {
-        this.result = response.data.data;
+        this.results = response.data.data;
       });
   },
 };
