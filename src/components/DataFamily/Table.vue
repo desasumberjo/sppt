@@ -10,7 +10,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="result in resultData" :key="result.id">
+      <tr v-for="result in results" :key="result.id">
         <td @click="detail(result)" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ result.id }}</td>
         <td @click="detail(result)" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ result.name }}</td>
         <td @click="detail(result)" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ result.rt }}</td>
@@ -53,7 +53,7 @@ export default {
   props: ["resultData"],
   data() {
     return {
-      result: null,
+      results: "",
       modalData: {
         name: "",
         road: "",
@@ -62,6 +62,9 @@ export default {
         rw: "",
       },
     };
+  },
+  updated: function() {
+    this.results = this.resultData;
   },
   methods: {
     detail(result) {
@@ -83,9 +86,11 @@ export default {
           },
         })
         .then(() => {
-          window.location.reload();
+          console.log("Sukses");
+          this.results.splice(this.results.indexOf(id), 1);
         })
-        .catch(() => {
+        .catch((error) => {
+          console.log(error);
           sessionStorage.setItem("idFamily", id);
           this.$router.push({ name: "DeleteFamily" });
         });
