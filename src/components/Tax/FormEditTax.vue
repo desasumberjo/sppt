@@ -24,7 +24,7 @@
     </div>
 
     <div class="d-flex justify-content-end mt-4">
-      <button @click="submitAddTax" class="btn btn-primary" :disabled="isLoading"><span v-if="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span v-if="!isLoading">Kirim</span></button>
+      <button @click="patchAddTax" class="btn btn-primary" :disabled="isLoading"><span v-if="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span v-if="!isLoading">Kirim</span></button>
     </div>
   </div>
 </template>
