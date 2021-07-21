@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="result in resultData" :key="result.id">
+      <tr v-for="result in results" :key="result.id">
         <td @click="detail(result.tax_object.nop)" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ result.taxpayer.name }}</td>
         <td @click="detail(result.tax_object.nop)" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ result.tax_object.nop }}</td>
         <td @click="detail(result.tax_object.nop)" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ result.tax_object.guardian_id }}</td>
@@ -64,7 +64,7 @@ export default {
   props: ["resultData"],
   data() {
     return {
-      hasilPencarian: null,
+      results: "",
       id: "",
       modalData: {
         name: "",
@@ -78,6 +78,9 @@ export default {
         buildingArea: "",
       },
     };
+  },
+  updated: function() {
+    this.results = this.resultData;
   },
   methods: {
     detail(id) {
@@ -110,7 +113,7 @@ export default {
           },
         })
         .then(() => {
-          window.location.reload();
+          this.results.splice(this.results.indexOf(id), 1);
         });
     },
   },
