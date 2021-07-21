@@ -55,9 +55,8 @@ export default {
             Authorization: `Bearer ${sessionStorage.getItem("token")}`,
           },
         })
-        .then((response) => {
-          this.result = response.data.data;
-          window.location.reload();
+        .then(() => {
+          this.result.splice(this.result.indexOf(id), 1);
         });
     },
   },
