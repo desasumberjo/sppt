@@ -7,6 +7,7 @@
         <th>ID Pamong</th>
         <th>Luas Lahan</th>
         <th>Luas Bangunan</th>
+        <th>Ketetapan</th>
       </tr>
     </thead>
     <tbody>
@@ -16,6 +17,11 @@
         <td @click="detail(result)" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ result.tax_object.guardian_id }}</td>
         <td @click="detail(result)" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ result.tax_object.land_area }} m<sup>2</sup></td>
         <td @click="detail(result)" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ result.tax_object.building_area }} m<sup>2</sup></td>
+        <td @click="detail(result)" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ result.current_tax_amount }}</td>
+      </tr>
+      <tr>
+        <td class="text-center" style="font-weight: bold !important;" colspan="5">Total Pajak</td>
+        <td>Rp. {{ totalTax }}</td>
       </tr>
     </tbody>
   </table>
@@ -64,6 +70,7 @@ export default {
   props: ["resultData"],
   data() {
     return {
+      totalTax: 0,
       modalData: {
         name: "",
         nop: "",
@@ -98,6 +105,11 @@ export default {
         this.modalData.taxHistories = response.data.data.tax_histories;
       });
     },
+  },
+  mounted: function() {
+    for (let i = 0; i < this.resultData.length; i++) {
+      this.totalTax += this.resultData[i].current_tax_amount;
+    }
   },
 };
 </script>
