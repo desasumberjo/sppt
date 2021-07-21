@@ -88,7 +88,7 @@ export default {
           },
         })
         .then(() => {
-          window.location.reload();
+          this.results.splice(this.results.indexOf(result.id), 1);
         });
     },
   },
