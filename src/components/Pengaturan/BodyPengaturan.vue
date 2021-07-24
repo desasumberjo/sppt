@@ -25,6 +25,9 @@
     <label class="form-label">Foto Profile</label>
     <input class="form-control" type="file" @change="onFileChange" />
   </div>
+  <div class="form-text">
+    File berformat png, jpg atau jpeg. Dan file kurang dari 3 MB
+  </div>
 
   <div class="row">
     <div class="col-12 mt-4">
@@ -44,7 +47,7 @@
         Password tidak Sesuai
       </div>
       <div class="alert alert-danger mt-4" role="alert" v-if="isError">
-        Data yang Anda Masukkan Belum Lengkap
+        Data yang Anda Masukkan Belum Lengkap / Tidak Sesuai
       </div>
     </div>
   </div>
@@ -74,7 +77,12 @@ export default {
   },
   methods: {
     onFileChange(event) {
-      this.profilePicture = event.target.files[0];
+      if (event.target.files[0].type === "image/jpeg" || event.target.files[0].type === "image/png" || event.target.files[0].type === "image/jpg") {
+        if (event.target.files[0].size < 300000) {
+          this.profilePicture = event.target.files[0];
+        }
+      }
+      console.log(event.target);
     },
     updateProfile() {
       this.isLoading = true;
